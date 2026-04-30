@@ -1,7 +1,10 @@
 #include "Neuron.h"
 
-int main(int argc, char *argv[]){
-    Neuron n(1, 5);
-    n.display();
+int main(){
+    int inputLayerSize = 1;
+    int outPutLayerSize = 1;
+    
+
+    
     return 0;
 }
