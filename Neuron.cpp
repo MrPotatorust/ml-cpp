@@ -2,11 +2,12 @@
 #include <iostream>
 #include "Neuron.h"
 
-Neuron::Neuron(int id, int weight) {
-    this->id = id;
+Neuron::Neuron(int weight)
+{
     this->weight = weight;
 };
 
-void Neuron::display() {
-    std::cout << "Neuron ID: " << id << ", Weight: " << weight << std::endl;
+void Neuron::display()
+{
+    std::cout << "Weight : " << weight << std::endl;
 };
