@@ -1,13 +1,13 @@
-#include <string>
-#include <iostream>
 #include "Neuron.h"
 
-Neuron::Neuron(int weight)
+Neuron::Neuron()
 {
-    this->weight = weight;
-};
+    this->weights = {};
+    this->bias = 0.0f;
+}
 
-void Neuron::display()
+Neuron::Neuron(std::vector<float> weights, float bias)
 {
-    std::cout << "Weight : " << weight << std::endl;
-};
+    this->weights = weights;
+    this->bias = bias;
+}

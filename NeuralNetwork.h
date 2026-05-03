@@ -1,5 +1,4 @@
 #include "Neuron.h"
-#include <vector>
 
 #pragma once
 
@@ -13,9 +12,8 @@ public:
     int inputLayerSize;
     NeuronGrid neurons;
 
-    void predict();
-    void setOutputLayerSize(int outputLayerSize);
-    void setInputLayerSize(int inputLayerSize);
+    void predict(std::vector<float> input);
+    void train(int epochs);
     void setNeurons(NeuronGrid neurons);
     void initializeLayers();
 };

@@ -1,22 +1,38 @@
 #include <random>
 #include <iostream>
+#include <vector>
 
 #include "NeuralNetwork.h"
 
-using namespace std;
-
-void NeuralNetwork::predict()
+void NeuralNetwork::predict(std::vector<float> input)
 {
-}
+    if(input.size() < 1){
+        
+    }
+    std::vector<float> layerInputs = input;
 
-void NeuralNetwork::setOutputLayerSize(int outputLayerSize)
-{
-    this->outputLayerSize = outputLayerSize;
-}
+    for (const std::vector<Neuron> &layer : this->neurons)
+    {
+        std::vector<float> newOutputs;
 
-void NeuralNetwork::setInputLayerSize(int inputLayerSize)
-{
-    this->inputLayerSize = inputLayerSize;
+        for (const Neuron &neuron : layer)
+        {
+            float sum = neuron.bias;
+            for (size_t i = 0; i < neuron.weights.size() && i < layerInputs.size(); ++i)
+            {
+                sum += neuron.weights[i] * layerInputs[i];
+            }
+            newOutputs.push_back(sum);
+        }
+
+        layerInputs = newOutputs;
+    }
+
+    // Print final outputs for now
+    std::cout << "Output:";
+    for (float v : layerInputs)
+        std::cout << ' ' << v;
+    std::cout << std::endl;
 }
 
 void NeuralNetwork::initializeLayers()
@@ -26,20 +42,32 @@ void NeuralNetwork::initializeLayers()
 
     int layers = 2;
     int neuronsPerLayer = 2;
+    int weightCount = neuronsPerLayer;
 
-    vector<vector<Neuron>> newVectors(3, vector<Neuron>(4, 0));
-
-    this->neurons = newVectors;
+    NeuronGrid newNeurons(layers, std::vector<Neuron>(neuronsPerLayer));
 
     for (int i = 0; i < layers; i++)
     {
+
         for (int x = 0; x < neuronsPerLayer; x++)
         {
-            this->neurons[i][x].weight = weight(rd);
+            std::vector<float> w;
+            for (int k = 0; k < weightCount; k++)
+                w.push_back(weight(rd));
+
+            newNeurons[i][x].weights = w;
+            newNeurons[i][x].bias = weight(rd);
         }
     }
+
+    this->neurons = newNeurons;
 }
 
+void NeuralNetwork::train(int epochs)
+{
+}
+
+// This function is kind of broken
 void NeuralNetwork::setNeurons(NeuronGrid neurons)
 {
     this->neurons = neurons;

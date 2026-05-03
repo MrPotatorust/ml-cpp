@@ -1,10 +1,12 @@
+#include <vector>
+
 #pragma once
 
 class Neuron
 {
 public:
-    float weight;
-
-    Neuron(int weight);
-    void display();
+    std::vector<float> weights;
+    float bias;
+    Neuron();
+    Neuron(std::vector<float> weights, float bias);
 };
