@@ -1,13 +1,14 @@
 #include <random>
 #include <iostream>
 #include <vector>
+#include <thread>
 
 #include "NeuralNetwork.h"
 
 void NeuralNetwork::predict(std::vector<float> input)
 {
-    if(input.size() < 1){
-        
+    if (input.size() < 1)
+    {
     }
     std::vector<float> layerInputs = input;
 
@@ -40,19 +41,19 @@ void NeuralNetwork::initializeLayers()
     std::random_device rd;
     std::uniform_real_distribution<float> weight(0, 1);
 
-    int layers = 2;
-    int neuronsPerLayer = 2;
-    int weightCount = neuronsPerLayer;
+    std::size_t layers = 2;
+    std::size_t neuronsPerLayer = 2;
+    std::size_t weightCount = neuronsPerLayer;
 
     NeuronGrid newNeurons(layers, std::vector<Neuron>(neuronsPerLayer));
 
-    for (int i = 0; i < layers; i++)
+    for (std::size_t i = 0; i < layers; i++)
     {
 
-        for (int x = 0; x < neuronsPerLayer; x++)
+        for (std::size_t x = 0; x < neuronsPerLayer; x++)
         {
             std::vector<float> w;
-            for (int k = 0; k < weightCount; k++)
+            for (std::size_t k = 0; k < weightCount; k++)
                 w.push_back(weight(rd));
 
             newNeurons[i][x].weights = w;
@@ -65,6 +66,7 @@ void NeuralNetwork::initializeLayers()
 
 void NeuralNetwork::train(int epochs)
 {
+    (void)epochs;
 }
 
 // This function is kind of broken

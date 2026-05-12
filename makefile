@@ -1,2 +1,2 @@
 compile:
-	g++ main.cpp Neuron.cpp NeuralNetwork.cpp helpers.cpp -o main -std=c++23 -Wall -Wextra -Wconversion -Wpedantic
+	hipcc main.cpp Neuron.cpp NeuralNetwork.cpp helpers.cpp MatrixCalculations.cpp -o main -I/opt/rocm/include -std=c++23 -Wall -Wextra -Wconversion -Wpedantic
